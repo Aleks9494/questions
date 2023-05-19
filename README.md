@@ -5,7 +5,7 @@
  - docker-compose exec app alembic upgrade head
 
 Пример запроса:
-
+ - Метод POST с телом json. Тип application/json
 {
   "questions_num": 3
 }
@@ -21,3 +21,6 @@
  - docker-compose exec -it db bash
  - psql -U postgres
  - \connect questions
+
+Для доступа в SWAGGER:
+ - http://0.0.0.0:8010/docs
