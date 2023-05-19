@@ -7,7 +7,7 @@
 Пример запроса:
  - Метод POST с телом json. Тип application/json
 {
-  "questions_num": 3
+  "questions_num": 3 (тип int)
 }
 
 Пример ответа:
