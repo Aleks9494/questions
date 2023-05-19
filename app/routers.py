@@ -16,7 +16,6 @@ from app.base import get_session
 from sqlalchemy.orm import Session
 from sqlalchemy import exc
 
-
 logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix='/api/v1')
@@ -35,18 +34,14 @@ async def questions_number(
     if response.status_code != 200:
         return JSONResponse(content="Bad request to jservice", status_code=400)
 
-    logger.info(response.json())
-
     last_record = db_session.query(Table_1).order_by(Table_1.id.desc()).first()
     if last_record is not None:
         last_question = QuestionDB.from_orm(last_record).q_text
-        logger.info(QuestionDB.from_orm(last_record).id_from_site)
     else:
         last_question = ""
 
     questions = Questions()
     questions = await create_model_questions(questions, response.json())
-    logger.info(questions.questions)
 
     i = 0
     while i < len(questions.questions):
@@ -79,9 +74,7 @@ async def questions_number(
         finally:
             i += 1
 
-    logger.info(questions.questions)
-
-    return JSONResponse(content='Success', status_code = 201)
+    return JSONResponse(content='Success', status_code=201)
 
 
 async def request_to_api(
@@ -93,8 +86,8 @@ async def request_to_api(
 
 
 async def create_model_questions(
-    questions: Questions,
-    response_json: dict
+        questions: Questions,
+        response_json: dict
 ) -> Questions:
     for i in response_json:
         question_for_db = Question(id=i['id'], question=i['question'], date=i['created_at'])
