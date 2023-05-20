@@ -20,7 +20,7 @@
 Для входа в контейнер с БД:
  - docker-compose exec -it db bash
  - psql -U postgres
- - \connect questions
+ - \connect questions;
 
 Для доступа в SWAGGER:
  - http://0.0.0.0:8010/docs
