@@ -25,7 +25,7 @@ router = APIRouter(prefix='/api/v1')
 async def questions_number(
         questions_num: QuestionNumber,
         db_session: Session = Depends(get_session)
-):
+) -> JSONResponse:
     if questions_num.questions_num == 0:
         return JSONResponse(content="Empty value for questions_num", status_code=400)
 
