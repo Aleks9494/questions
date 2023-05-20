@@ -41,7 +41,10 @@ async def questions_number(
         last_question = ""
 
     questions = Questions()
-    questions = await create_model_questions(questions, response.json())
+    questions = await create_model_questions(
+        questions=questions,
+        response_json=response.json()
+    )
 
     i = 0
     while i < len(questions.questions):
@@ -67,9 +70,9 @@ async def questions_number(
 
             questions = await create_model_questions(questions, response.json())
 
-        except Exception:
+        except Exception as e:
             db_session.rollback()
-            return JSONResponse(content="Error with DataBase", status_code=400)
+            return JSONResponse(content=f"Error with DB, cause {str(e)}", status_code=400)
 
         finally:
             i += 1
